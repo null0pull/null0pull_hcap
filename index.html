@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram: NULL0PULL</title>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .instructions {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            border-radius: 8px;
+        }
+        
+        .instructions h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .captcha-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            min-height: 80px;
+        }
+        
+        .result {
+            background: #d4edda;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .result h3 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+        
+        .token-display {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .status.waiting {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NULL0PULL hCaptcha</h1>
+        <div class="captcha-container">
+            <div class="h-captcha" 
+                 data-sitekey="c4c0a5b8-7934-4172-9306-d67c5788aaa8"
+                 data-callback="onCaptchaSuccess"></div>
+        </div>
+        
+        <div class="status waiting" id="status">
+            <div class="loading"></div>
+            Waiting for you to solve the captcha...
+        </div>
+        
+        <div class="result" id="result">
+            <h3>Successfully!</h3>
+            <p>Your token:</p>
+            <div class="token-display" id="tokenDisplay"></div>
+            <button class="copy-btn" onclick="copyToken()">Copy Token</button>
+        </div>
+    </div>
+    
+    <script>
+        let captchaToken = null;
+        
+        function onCaptchaSuccess(token) {
+            captchaToken = token;
+            
+            document.getElementById('status').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('tokenDisplay').textContent = token;
+            
+        }
+        
+        function copyToken() {
+            const tokenText = document.getElementById('tokenDisplay').textContent;
+            navigator.clipboard.writeText(tokenText).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        window.addEventListener('load', () => {
+            console.log('widget should be loading...');
+        });
+    </script>
+</body>
+</html>
+        
+
+
